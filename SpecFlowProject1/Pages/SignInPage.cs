@@ -1,13 +1,16 @@
-﻿using ActumTask.Utils;
+﻿using ActumTask.Models;
+using ActumTask.Utils;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System.Text.Json;
 
 namespace ActumTask.Pages
 {
     public class SignInPage
     {
         private readonly IWebDriver _webDriver;
+
         public SignInPage(IWebDriver webDriver)
         {
             _webDriver = webDriver;
@@ -49,37 +52,41 @@ namespace ActumTask.Pages
 
         // Actions
 
-        //Personal info
         public void ClickAccountButton() => CreateAnAccountButton.Click();
-        public void ClickLogiut() => Logout.Click();
-        public void ClickRadioButton() 
+
+        public void ClickLogout() => Logout.Click();
+
+        public void PersonalInfo()
         {
+            string userDataJson = "UserData.json";
+            string jsonString = File.ReadAllText(userDataJson);
+            UserData? userdata = JsonSerializer.Deserialize<UserData>(jsonString)!;
+
             _webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             TitleRadioButton.Click();
+            FirstName.SendKeys(userdata.FirstName);
+            LastName.SendKeys(userdata.LastName);
+            Password.SendKeys(userdata.Password);
+            Date.Click();
+            Month.Click();
+            Year.Click();
+            Address.SendKeys(userdata.Address);
+            City.SendKeys(userdata.City);
+            CountryDropdown.Click();
+            StateDropdown.Click();
+            Zip.SendKeys(userdata.Zip);
+            MobilePhone.SendKeys(userdata.MobilePhone);
         }
-        public void FirstNameCredentials() => FirstName.SendKeys("Marko");
-        public void LastNameCredentials() => LastName.SendKeys("tal"); // random
-        public void PasswordCredentials() => Password.SendKeys("1234567"); // also random
-        public void ChooseDate() => Date.Click(); // method for random choosing from dropdown for all dropdowns
-        public void ChooseDay() => Month.Click();
-        public void ChooseYear() => Year.Click();
 
-        //Address info
-
-        public void AddressCredentials() => Address.SendKeys("Any line"); // random
-        public void CityCredentials() => City.SendKeys("New York"); // random
-        public void CountryCredentials() => CountryDropdown.Click(); // first choose country
-        public void ChooseState() => StateDropdown.Click();
-        public void ZipNummber() => Zip.SendKeys("00000");
-        public void MobileNummber() => MobilePhone.SendKeys("555555555"); // random 9 nummbers
         public void ClickRegisterButton() => RegisterButton.Click();
 
-
         public void ClickCreateAccountButton() => CreateAnAccountButton.Click();
+
         public void NewEmail()
         {
             Email.SendKeys(Utilities.GenerateRandomEmail());
         }
+
         public void EmailCredentials(string email)
         {
             Email.SendKeys(email);
@@ -102,21 +109,44 @@ namespace ActumTask.Pages
 
         // Validation
 
-        public void AuthenticationErrorValidation() => Assert.AreEqual("Authentication failed.", SignInError.Text);
-        public void EmailAddressErrorValidation() => Assert.AreEqual("An email address required.", SignInError.Text);
-        public void EmailFormatErrorValidation() => Assert.AreEqual("Invalid email address.", SignInError.Text);
-        public void RequiredPasswordErrorValidation() => Assert.AreEqual("Password is required.", SignInError.Text);
+        public string AuthenticationErrorValidation()
+        {
+            return SignInError.Text;
+        }
 
-        public void ForgotPassPageValidation() => Assert.IsTrue(ForgotPasswordPage.Displayed);
+        public string EmailAddressErrorValidation()
+        {
+            return SignInError.Text;
+        }
+
+        public string EmailFormatErrorValidation()
+        {
+            return SignInError.Text;
+        }
+
+        public string RequiredPasswordErrorValidation()
+        {
+            return SignInError.Text;
+        }
+
+        public bool ForgotPassPageValidation()
+        {
+            return ForgotPasswordPage.Displayed;
+        }
         public void ExistingEmailErrorValidation()
         {
             WebDriverWait wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(5));
             IWebElement error = wait.Until(
                 _webDriver => _webDriver.FindElement(
                     By.XPath("//*[@id='create_account_error']/ol/li")));
+            if (error != null)
             Assert.IsNotNull(error);
             Assert.IsTrue(ExistingEmail.Displayed);
         }
-        public void MyAccountPageValidation() => Assert.IsTrue(MyAccountHeader.Displayed);
+
+        public bool MyAccountPageValidation()
+        {
+            return MyAccountHeader.Displayed;
+        }
     }
 }

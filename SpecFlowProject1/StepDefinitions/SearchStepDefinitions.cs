@@ -1,13 +1,13 @@
 using ActumTask.Drivers;
 using ActumTask.Pages;
-using System;
+using NUnit.Framework;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
 namespace ActumTask.StepDefinitions
 {
     [Binding]
-    public class SearchStepDefinitions
+    public class SearchStepDefinitions : TestBase
     {
         private readonly HomePage _homePageObject;
 
@@ -20,7 +20,7 @@ namespace ActumTask.StepDefinitions
         [Given(@"I am on Home Page")]
         public void GivenIAmOnHomePage()
         {
-            _homePageObject.OpenHomeUrl();
+            _homePageObject.OpenHomeUrl(HomePageUrl);
         }
 
         [Given(@"I type query into search box")]
@@ -52,7 +52,7 @@ namespace ActumTask.StepDefinitions
         [Then(@"Please enter a search keyword warning is presented")]
         public void ThenPleaseEnterASearchKeywordWarningIsPresented()
         {
-            _homePageObject.EnterASearchWarningMessageValidation();
+            Assert.IsTrue(_homePageObject.EnterASearchWarningMessageValidation());
         }
 
         [Then(@"Drop down search hints are presented")]
@@ -64,7 +64,7 @@ namespace ActumTask.StepDefinitions
         [Then(@"No results found warning is presented")]
         public void ThenNoResultsFoundWarningIsPresented()
         {
-            _homePageObject.NoResultsQueryValidation();
+            Assert.IsTrue(_homePageObject.NoResultsQueryValidation());
         }
     }
 }

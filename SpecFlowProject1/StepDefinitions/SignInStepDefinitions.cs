@@ -1,16 +1,16 @@
 using ActumTask.Drivers;
+using ActumTask.Common;
 using ActumTask.Pages;
+using NUnit.Framework;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
 namespace ActumTask.StepDefinitions
 {
     [Binding]
-    public class SignInStepDefinitions
+    public class SignInStepDefinitions : TestBase
     {
         private readonly SignInPage _signInPageObject;
-
-        private const string SignInPageUrl = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
 
         public SignInStepDefinitions(BrowserDriver driver)
         {
@@ -42,27 +42,10 @@ namespace ActumTask.StepDefinitions
             _signInPageObject.ClickAccountButton();
         }
 
-        [Given(@"I Fill my personal information")]
-        public void GivenIFillMyPersonalInformation()
+        [Given(@"I type my personal information")]
+        public void GivenITypeMyPersonalInformation()
         {
-            _signInPageObject.ClickRadioButton();
-            _signInPageObject.FirstNameCredentials();
-            _signInPageObject.LastNameCredentials();
-            _signInPageObject.PasswordCredentials();
-            _signInPageObject.ChooseDate();
-            _signInPageObject.ChooseDay();
-            _signInPageObject.ChooseYear();
-        }
-
-        [Given(@"I Fill my address information")]
-        public void GivenIFillMyAddressInformation()
-        {
-            _signInPageObject.AddressCredentials();
-            _signInPageObject.CityCredentials();
-            _signInPageObject.CountryCredentials();
-            _signInPageObject.ChooseState();
-            _signInPageObject.ZipNummber();
-            _signInPageObject.MobileNummber();
+            _signInPageObject.PersonalInfo();
         }
 
         [When(@"I press Register button")]
@@ -74,8 +57,8 @@ namespace ActumTask.StepDefinitions
         [Then(@"My Account page is presented")]
         public void ThenMyAccountPageIsPresented()
         {
-            _signInPageObject.MyAccountPageValidation();
-            _signInPageObject.ClickLogiut();
+            Assert.IsTrue(_signInPageObject.MyAccountPageValidation());
+            _signInPageObject.ClickLogout();
         }
 
         [When(@"I click Create an Account button")]
@@ -87,7 +70,7 @@ namespace ActumTask.StepDefinitions
         [Then(@"Valid error message is presented")]
         public void ThenValidErrorMessageIsPresented()
         {
-            _signInPageObject.ExistingEmailErrorValidation();
+           _signInPageObject.ExistingEmailErrorValidation();
         }
 
         [When(@"I click on Forgot your password link")]
@@ -99,7 +82,7 @@ namespace ActumTask.StepDefinitions
         [Then(@"Forgot your password page is presented")]
         public void ThenForgotYourPasswordPageIsPresented()
         {
-            _signInPageObject.ForgotPassPageValidation();
+            Assert.IsTrue(_signInPageObject.ForgotPassPageValidation());
         }
 
         [When(@"I click on Sign In button")]
@@ -111,7 +94,7 @@ namespace ActumTask.StepDefinitions
         [Then(@"Email address is required error message is presented")]
         public void ThenEmailAddressIsRequiredErrorMessageIsPresented()
         {
-            _signInPageObject.EmailAddressErrorValidation();
+            Assert.AreEqual(_signInPageObject.EmailAddressErrorValidation(), ErrorMessages.EmailRequiredError);
         }
 
         [When(@"I type invalid email")]
@@ -124,7 +107,7 @@ namespace ActumTask.StepDefinitions
         [Then(@"Invalid email address error message is presented")]
         public void ThenInvalidEmailAddressErrorMessageIsPresented()
         {
-            _signInPageObject.EmailFormatErrorValidation();
+            Assert.AreEqual(_signInPageObject.EmailFormatErrorValidation(), ErrorMessages.InvalidEmail);
         }
 
         [Given(@"I type valid email")]
@@ -144,7 +127,7 @@ namespace ActumTask.StepDefinitions
         [Then(@"Authentcation error message is presented")]
         public void ThenAuthentcationErrorMessageIsPresented()
         {
-            _signInPageObject.AuthenticationErrorValidation();
+            Assert.AreEqual(_signInPageObject.AuthenticationErrorValidation(), ErrorMessages.AuthenticationError);
         }
 
         [Given(@"I type invalid email format")]
@@ -157,7 +140,7 @@ namespace ActumTask.StepDefinitions
         [Then(@"Invalid password error message is presented")]
         public void ThenInvalidPasswordMessageIsPresented()
         {
-            _signInPageObject.RequiredPasswordErrorValidation();
+            Assert.AreEqual(_signInPageObject.RequiredPasswordErrorValidation(), ErrorMessages.PasswordRequired);
         }
     }
 }

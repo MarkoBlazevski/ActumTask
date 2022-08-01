@@ -118,3 +118,17 @@ C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\obj\Debug\net6.0\ref
 C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\obj\Debug\net6.0\ActumTask.pdb
 C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\obj\Debug\net6.0\ActumTask.genruntimeconfig.cache
 C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\obj\Debug\net6.0\ref\ActumTask.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\appsettings.json
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\UserData.json

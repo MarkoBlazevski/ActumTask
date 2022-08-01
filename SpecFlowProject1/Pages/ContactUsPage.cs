@@ -1,12 +1,9 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace ActumTask.Pages
 {
     public class ContactUsPage
     {
-        private const string HomePageUrl = "http://automationpractice.com/index.php";
-
         private readonly IWebDriver _webDriver;
 
         public ContactUsPage(IWebDriver webDriver)
@@ -42,6 +39,7 @@ namespace ActumTask.Pages
         public void SelectDropdownWebmaster() => DropDownWebmaster.Click();
 
         public void ClickSendButton() => SendButton.Click();
+
         public void ClickHomePageButton() => HomePageButton.Click();
 
         public void Credentials(string email, int orderReference, string? message = null)
@@ -53,19 +51,29 @@ namespace ActumTask.Pages
         
         //Validations
 
-        public void SuccessMessageValidation() => Assert.AreEqual(
-            "Your message has been successfully sent to our team.", SuccessMessage.Text);
-        public void InvalidEmailAddressValidation() => Assert.AreEqual(
-            "Invalid email address.", EmailErrorMessage.Text);
-        public void InvalidMessageValidation() => Assert.AreEqual(
-            "The message cannot be blank.", MessageErrorMessage.Text);
-        public void InvalidSubjectValidation() => Assert.AreEqual(
-            "Please select a subject from the list provided.", SubjectErrorMessage.Text);
-
-        public void HomePageValidation() 
+        public string SuccessMessageValidation()
         {
-            string URL = _webDriver.Url;
-            Assert.AreEqual(HomePageUrl, URL);
+            return SuccessMessage.Text;
+        }
+        
+        public string InvalidEmailAddressValidation()
+        {
+            return EmailErrorMessage.Text;
+        }
+       
+        public string BlankMessageValidation()
+        {
+            return MessageErrorMessage.Text;
+        }
+ 
+        public string InvalidSubjectValidation()
+        {
+            return SubjectErrorMessage.Text;
+        }
+
+        public string HomePageValidation() 
+        {
+            return _webDriver.Url;
         }
     }
 }

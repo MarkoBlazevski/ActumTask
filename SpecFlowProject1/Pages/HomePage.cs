@@ -6,8 +6,6 @@ namespace ActumTask.Pages
 {
     public class HomePage
     {
-        private const string HomePageUrl = "http://automationpractice.com/index.php";
-
         private readonly IWebDriver _webDriver;
 
 
@@ -16,9 +14,9 @@ namespace ActumTask.Pages
             _webDriver = webDriver;
         }
 
-        public void OpenHomeUrl()
+        public void OpenHomeUrl(string url)
         {
-            _webDriver.Navigate().GoToUrl(HomePageUrl);
+            _webDriver.Navigate().GoToUrl(url);
             _webDriver.Manage().Window.Maximize();
         }
 
@@ -39,22 +37,27 @@ namespace ActumTask.Pages
 
         // Validations
 
-        public void NoResultsQueryValidation() => Assert.IsTrue(NoResultsFoundWarningMessage.Displayed);
-
-        public void EnterASearchWarningMessageValidation() => Assert.AreEqual(
-            "Please enter a search keyword", EnterASearchWarningMessage.Text);
-
-        public void QueryValidation()
+        public bool NoResultsQueryValidation()
         {
-            string URL = _webDriver.Url;
-            StringAssert.Contains("search_query=" + SearchBox.GetAttribute("value"), URL);
-            StringAssert.Contains("results have been found", SearchResult.Text);
+            return NoResultsFoundWarningMessage.Displayed;
+        }
+
+        public bool EnterASearchWarningMessageValidation()
+        {
+            return EnterASearchWarningMessage.Displayed;
+        }
+
+        public string QueryValidation()
+        {
+            return SearchResult.Text;
         }
 
         public void HintDropdownMenuValidation()
         {
             WebDriverWait wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(20));
-            IWebElement dropdown = wait.Until(_webDriver => _webDriver.FindElement(By.ClassName("ac_results")));
+            IWebElement dropdown = wait.Until(_webDriver => 
+                _webDriver.FindElement(By.ClassName("ac_results")));
+            if(dropdown != null)
             Assert.IsNotNull(dropdown);
         }
     }

@@ -7,8 +7,7 @@ Scenario: Create an Account
 	Given I am on Sign In page
 	And I create new account with following details
 	And I click Create an Account button
-	And I Fill my personal information
-	And I Fill my address information
+	And I type my personal information
 	When I press Register button
 	Then My Account page is presented
 
