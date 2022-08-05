@@ -1,6 +1,7 @@
 ﻿Feature: Contact Us
 
-A short summary of the feature
+These few test cases should cover the basic 
+functionalities of the contact us page.
 
 @smoke
 Scenario: Send a message to customer service

@@ -11,12 +11,6 @@ namespace ActumTask.Pages
             _webDriver = webDriver;
         }
 
-        public void OpenContactUsUrl(string url)
-        {
-            _webDriver.Navigate().GoToUrl(url);
-            _webDriver.Manage().Window.Maximize();
-        }
-
         //Finding elements
 
         private IWebElement DropDownCustomerService => _webDriver.FindElement(By.XPath("//*[@id='id_contact']/option[2]"));
@@ -33,6 +27,8 @@ namespace ActumTask.Pages
 
 
         //Actions
+
+        public void OpenContactUsUrl(string url) => _webDriver.Navigate().GoToUrl(url);
 
         public void SelectDropDownCustomerService() => DropDownCustomerService.Click();
 

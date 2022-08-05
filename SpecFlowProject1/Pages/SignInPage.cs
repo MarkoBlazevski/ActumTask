@@ -1,9 +1,7 @@
-﻿using ActumTask.Models;
-using ActumTask.Utils;
+﻿using ActumTask.Utils;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System.Text.Json;
 
 namespace ActumTask.Pages
 {
@@ -14,12 +12,6 @@ namespace ActumTask.Pages
         public SignInPage(IWebDriver webDriver)
         {
             _webDriver = webDriver;
-        }
-
-        public void OpenSignInUrl(string url)
-        {
-            _webDriver.Navigate().GoToUrl(url);
-            _webDriver.Manage().Window.Maximize();
         }
 
         //Finding elements
@@ -52,30 +44,28 @@ namespace ActumTask.Pages
 
         // Actions
 
+        public void OpenSignInUrl(string url) => _webDriver.Navigate().GoToUrl(url);
+
         public void ClickAccountButton() => CreateAnAccountButton.Click();
 
         public void ClickLogout() => Logout.Click();
 
         public void PersonalInfo()
         {
-            string userDataJson = "UserData.json";
-            string jsonString = File.ReadAllText(userDataJson);
-            UserData? userdata = JsonSerializer.Deserialize<UserData>(jsonString)!;
-
             _webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             TitleRadioButton.Click();
-            FirstName.SendKeys(userdata.FirstName);
-            LastName.SendKeys(userdata.LastName);
-            Password.SendKeys(userdata.Password);
+            FirstName.SendKeys(Utilities.GetUserData().FirstName);
+            LastName.SendKeys(Utilities.GetUserData().LastName);
+            Password.SendKeys(Utilities.GetUserData().Password);
             Date.Click();
             Month.Click();
             Year.Click();
-            Address.SendKeys(userdata.Address);
-            City.SendKeys(userdata.City);
+            Address.SendKeys(Utilities.GetUserData().Address);
+            City.SendKeys(Utilities.GetUserData().City);
             CountryDropdown.Click();
             StateDropdown.Click();
-            Zip.SendKeys(userdata.Zip);
-            MobilePhone.SendKeys(userdata.MobilePhone);
+            Zip.SendKeys(Utilities.GetUserData().Zip);
+            MobilePhone.SendKeys(Utilities.GetUserData().MobilePhone);
         }
 
         public void ClickRegisterButton() => RegisterButton.Click();
@@ -139,7 +129,6 @@ namespace ActumTask.Pages
             IWebElement error = wait.Until(
                 _webDriver => _webDriver.FindElement(
                     By.XPath("//*[@id='create_account_error']/ol/li")));
-            if (error != null)
             Assert.IsNotNull(error);
             Assert.IsTrue(ExistingEmail.Displayed);
         }

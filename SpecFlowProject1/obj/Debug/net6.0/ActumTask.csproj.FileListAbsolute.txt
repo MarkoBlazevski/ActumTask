@@ -132,3 +132,6 @@ C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Mic
 C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
 C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
 C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\UserData.json
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\AngleSharp.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\ICSharpCode.SharpZipLib.dll
+C:\Users\msg\source\repos\SpecFlowProject1\SpecFlowProject1\bin\Debug\net6.0\WebDriverManager.dll

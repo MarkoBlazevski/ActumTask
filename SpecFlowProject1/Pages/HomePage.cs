@@ -14,11 +14,6 @@ namespace ActumTask.Pages
             _webDriver = webDriver;
         }
 
-        public void OpenHomeUrl(string url)
-        {
-            _webDriver.Navigate().GoToUrl(url);
-            _webDriver.Manage().Window.Maximize();
-        }
 
         private IWebElement SearchBox => _webDriver.FindElement(By.XPath("//*[@id='search_query_top']"));
         private IWebElement SearchButton => _webDriver.FindElement(By.XPath("//*[@id='searchbox']/button"));
@@ -27,6 +22,8 @@ namespace ActumTask.Pages
         private IWebElement NoResultsFoundWarningMessage => _webDriver.FindElement(By.XPath("//*[@id='center_column']/p"));
 
         //Actions
+
+        public void OpenHomeUrl(string url) => _webDriver.Navigate().GoToUrl(url);
 
         public void ClickSearchButton() => SearchButton.Click();
 
@@ -52,13 +49,13 @@ namespace ActumTask.Pages
             return SearchResult.Text;
         }
 
-        public void HintDropdownMenuValidation()
+        public IWebElement HintDropdownMenuValidation()
         {
             WebDriverWait wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(20));
             IWebElement dropdown = wait.Until(_webDriver => 
                 _webDriver.FindElement(By.ClassName("ac_results")));
-            if(dropdown != null)
-            Assert.IsNotNull(dropdown);
+            return dropdown;
+            //Assert.IsNotNull(dropdown);
         }
     }
 }

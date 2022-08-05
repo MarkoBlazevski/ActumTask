@@ -1,6 +1,7 @@
 ﻿Feature: Sign In
 
-A short summary of the feature
+These few test cases should cover the basic 
+functionalities of the SignIn us page.
 
 @smoke
 Scenario: Create an Account

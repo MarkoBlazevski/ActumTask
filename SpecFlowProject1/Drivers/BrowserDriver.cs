@@ -28,6 +28,8 @@ namespace ActumTask.Drivers
 
             var chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
 
+            chromeDriver.Manage().Window.Maximize();
+
             return chromeDriver;
         }
 

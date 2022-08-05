@@ -1,6 +1,7 @@
 ﻿Feature: Search
 
-A short summary of the feature
+These few test cases should cover the basic 
+functionalities of the search feature.
 
 @smoke
 Scenario: Type into Search box and perform query
